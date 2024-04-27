@@ -2,26 +2,23 @@ import { REST, Routes, Collection } from 'discord.js';
 import fg from 'fast-glob';
 import {useAppStore} from '@/store/app';
 
-const updateSlashCommands = async(commands) => {
+const updateSlashCommands = async(commands, guildid) => {
     const rest = new REST({version: 10}).setToken(process.env.TOKEN);
     const result = await rest.put(
         Routes.applicationGuildCommands(
             process.env.APPLICATION_ID,
-            '1233704797715300352'
+            guildid
             // guildid
         ),
         {
             body: commands,
-            // body: [
-            //     {name: 'ping', description: 'Ping the bot'}
-            // ]
         }
     )
 
     // console.log(result);
 }
 
-export const loadCommands = async() => {
+export const loadCommands = async(guildid) => {
     const appStore = useAppStore();
 
     const commands = [];
@@ -34,9 +31,9 @@ export const loadCommands = async() => {
         actions.set(cmd.command.name, cmd.action);
     }
 
-    await updateSlashCommands(commands);
+    await updateSlashCommands(commands, guildid);
     appStore.commandsActionMap = actions;
-    console.log(appStore.commandsActionMap);
+    // console.log(appStore.commandsActionMap);
 }
 
 export const loadEvents = async() => {

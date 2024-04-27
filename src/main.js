@@ -10,11 +10,18 @@ import {loadCommands, loadEvents} from '@/core/loader';
 vueInit();
 dotenv.config();
 
-loadCommands();
+const appStore = useAppStore();
+
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-const appStore = useAppStore();
+client.once(Events.ClientReady, (c) => {
+	const guild_ids = (c.guilds.cache.firstKey(100))
+	for(const guild_id of guild_ids){
+		loadCommands(guild_id);
+	}
+});
+
 appStore.client = client;
 loadEvents();
 
