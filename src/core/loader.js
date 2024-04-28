@@ -42,6 +42,7 @@ export const loadEvents = async() => {
     const files = await fg('./src/events/**/index.js');
     for (const file of files){
         const eventFile = await import(file);
+        
         if(eventFile.event.once){
             client.once(
                 eventFile.event.name, 
