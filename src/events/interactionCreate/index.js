@@ -7,7 +7,7 @@ export const event = {
 }
 
 export const action = async(interaction) => {
-    if( !interaction.isChatInputCommand()) return;
+    if( !interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) return;
     const appStore = useAppStore();
     const action = appStore.commandsActionMap.get(interaction.commandName);
     await action(interaction);
