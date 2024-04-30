@@ -3,6 +3,8 @@ import {uploadImg} from './upload_img.js'
 import { msg_get_xp } from './msg_get_xp.js';
 import { useAppStore } from '@/store/app';
 
+const cooldowns = new Set();
+
 export const event = {
     name: Events.MessageCreate,
     once: false
@@ -18,6 +20,14 @@ export const action = async(message) => {
             return;
         }
     }
-    console.log(`用戶${message.author.username}輸入`);
-    msg_get_xp(message);
+    if( !cooldowns.has(message.author.id)){
+        console.log(`用戶${message.author.username}獲得經驗值`);
+        msg_get_xp(message);
+
+        cooldowns.add(message.author.id);
+        setTimeout(() => {
+            cooldowns.delete(message.author.id);
+        }, 60000);
+
+    }
 }
