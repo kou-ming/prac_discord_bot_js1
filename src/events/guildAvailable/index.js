@@ -7,7 +7,7 @@ export const event = {
     once: false,
 }
 
-export const action = async(c) => {
+export const action = (c) => {
     const appStore = useAppStore();
     appStore.guild_ids.push(c.id);
 	loadCommands(c.id);
