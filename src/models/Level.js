@@ -20,4 +20,5 @@ const levelSchema = new Schema({
 });
 
 
-export const uerLevel = model('userLevel', levelSchema);
+// module.exports = model('userLevel', levelSchema);
+export const userLevel = model('userLevel', levelSchema);

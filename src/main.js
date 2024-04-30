@@ -4,7 +4,8 @@ import vueInit from '@/core/vue';
 import dotenv from 'dotenv';
 import { useAppStore } from '@/store/app';
 import {loadCommands, loadEvents} from '@/core/loader';
-import { Mongoose } from 'mongoose';
+// import { Mongoose } from 'mongoose';
+const mongoose = require('mongoose');
 
 vueInit();
 dotenv.config();
@@ -25,7 +26,7 @@ appStore.client = client;
 
 
 // 連接至資料庫
-const mongoose = new Mongoose();
+// const mongoose = new Mongoose();
 (async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI,{});

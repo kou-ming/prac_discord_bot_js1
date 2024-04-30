@@ -1,5 +1,6 @@
 import {Events} from 'discord.js';
 import {uploadImg} from './upload_img.js'
+import { msg_get_xp } from './msg_get_xp.js';
 import { useAppStore } from '@/store/app';
 
 export const event = {
@@ -17,5 +18,6 @@ export const action = async(message) => {
             return;
         }
     }
-    console.log('輸入...');
+    console.log(`用戶${message.author.username}輸入`);
+    msg_get_xp(message);
 }
