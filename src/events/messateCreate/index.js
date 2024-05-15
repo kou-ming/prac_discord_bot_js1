@@ -28,6 +28,6 @@ export const action = async(message) => {
         setTimeout(() => {
             cooldowns.delete(message.author.id);
         }, 60000);
-
+        
     }
 }
