@@ -9,7 +9,8 @@ export const uploadImg = async(message, repliedMessage) => {
         if (repliedMessage) {
 
             try{
-                message.reply(`上傳圖片名稱<${img_name}>, ${img_url}`);
+                // message.reply(`上傳圖片名稱<${img_name}>, ${img_url}`);
+                message.reply(`上傳圖片名稱<${img_name}>`);
                 check_state();
                 const newImg = new updateImg({
                     userId: message.author.id,
